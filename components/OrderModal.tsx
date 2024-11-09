@@ -40,6 +40,7 @@ const OrderModal = () => {
                   onChangeText={setName}
                   value={name}
                   placeholder="Ingresá tu nombre"
+                  placeholderTextColor={Colors.GRIS_OSCURO}
                 />
                 <QuantityInput onChangeQuantity={setQuantity} />
               </View>
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
     gap: 40,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
