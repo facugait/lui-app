@@ -13,7 +13,7 @@ const OrderModal = () => {
   return (
     <>
       <Button onPress={() => setModalVisible(!modalVisible)}>
-        Hace tu pedido
+        Hacé tu pedido
       </Button>
       <Modal
         animationType="fade"
@@ -25,7 +25,7 @@ const OrderModal = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Heading level={3}>INGRESA TU ORDEN</Heading>
+            <Heading level={3}>INGRESÁ TU ORDEN</Heading>
             <View style={{ gap: 20 }}>
               <View
                 style={{
@@ -39,14 +39,14 @@ const OrderModal = () => {
                   style={styles.inputName}
                   onChangeText={setName}
                   value={name}
-                  placeholder="Ingresa tu nombre"
+                  placeholder="Ingresá tu nombre"
                 />
                 <QuantityInput onChangeQuantity={setQuantity} />
               </View>
 
               <View style={{ gap: 10 }}>
-                <Button onPress={() => setModalVisible(!modalVisible)}>
-                  Enviar Pedido
+                <Button onPress={() => alert("Pedido enviado!")}>
+                  Enviar Pedido por WhatsApp
                 </Button>
 
                 <Button
@@ -68,18 +68,11 @@ const styles = StyleSheet.create({
   inputName: {
     height: 40,
     borderWidth: 1,
-    padding: 10,
-    backgroundColor: "#ffffff",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: Colors.BEIGE_CLARITO,
     borderRadius: 15,
     flex: 4,
-  },
-  inputQuantity: {
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    backgroundColor: "#ffffff",
-    borderRadius: 15,
-    flex: 1,
   },
   centeredView: {
     flex: 1,

@@ -24,7 +24,7 @@ const QuantityInput = ({
     >
       <Text
         style={{
-          fontWeight: 700,
+          fontWeight: "bold",
           fontSize: 25,
         }}
       >
@@ -37,27 +37,35 @@ const QuantityInput = ({
         }}
       >
         <Pressable
-          children={() => <Text style={styles.buttonText}>-</Text>}
-          style={[styles.decrease, styles.button]}
+          style={[
+            styles.button,
+            {
+              backgroundColor: quantity === "1" ? Colors.GRIS : Colors.RED,
+            },
+          ]}
           onPress={() => {
             setQuantity((prevState: string) => {
-              const result = (Number(prevState) - 1).toString();
-              onChangeQuantity(result);
-              return result;
+              const newQuantity = Math.max(1, Number(prevState) - 1).toString();
+              onChangeQuantity(newQuantity);
+              return newQuantity;
             });
           }}
-        />
+          disabled={quantity === "1"}
+        >
+          <Text style={styles.buttonText}>-</Text>
+        </Pressable>
         <Pressable
-          children={() => <Text style={styles.buttonText}>+</Text>}
           style={[styles.increase, styles.button]}
           onPress={() => {
             setQuantity((prevState: string) => {
-              const result = (Number(prevState) + 1).toString();
-              onChangeQuantity(result);
-              return result;
+              const newQuantity = (Number(prevState) + 1).toString();
+              onChangeQuantity(newQuantity);
+              return newQuantity;
             });
           }}
-        />
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -77,8 +85,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
-  buttonText: { color: Colors.WHITE, fontWeight: 700, fontSize: 16 },
+  buttonText: {
+    color: Colors.WHITE,
+    fontWeight: "bold",
+    fontSize: 24,
+    lineHeight: 30,
+  },
 });
 
 export default QuantityInput;

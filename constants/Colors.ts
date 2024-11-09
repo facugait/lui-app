@@ -7,6 +7,7 @@ export enum Colors {
   RED = "#93232C",
   RED_CLARITO = "#A04747",
   BEIGE = "#FEEFDA",
+  BEIGE_CLARITO = "F9F3EC",
   GREEN = "#31511E",
   WHITE = "#FFFFFF",
   GRIS = "#C0C0C0",
