@@ -21,7 +21,7 @@ export default function Text({
       style={{
         fontSize: bigger ? 20 : 14,
         fontWeight: bold ? 700 : 500,
-        color: price ? Colors.green : Colors.text,
+        color: price ? Colors.GREEN : Colors.RED,
         textAlign: centered ? "center" : "left",
       }}
     >
