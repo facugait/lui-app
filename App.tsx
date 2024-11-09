@@ -13,7 +13,7 @@ export default function App() {
         gap: 30,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: Colors.background,
+        backgroundColor: Colors.BEIGE,
       }}
     >
       <StatusBar />

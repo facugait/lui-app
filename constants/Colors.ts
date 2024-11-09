@@ -3,9 +3,13 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-export const Colors = {
-    text: '#93232C',
-    secondary: '#A04747',
-    background: '#FEEFDA',
-    green: '#31511E',
-};
+export enum Colors {
+  RED = "#93232C",
+  RED_CLARITO = "#A04747",
+  BEIGE = "#FEEFDA",
+  GREEN = "#31511E",
+  WHITE = "#FFFFFF",
+  GRIS = "#C0C0C0",
+  GRIS_CLARITO = "#E0DCDC",
+  BLACK = "#1A1A1A",
+}
