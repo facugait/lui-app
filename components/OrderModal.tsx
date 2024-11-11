@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, View, Text, StyleSheet, TextInput } from "react-native";
+import { Modal, View, StyleSheet, TextInput, Linking } from "react-native";
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import QuantityInput from "@/components/QuantityInput";
@@ -9,6 +9,35 @@ const OrderModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("1");
+
+  const message = `Hola, quiero el menu del día.\n_Nombre:_ *${name}*\n_Cantidad:_ *${quantity}*`;
+
+  const sendMessageToWhatsApp = async (
+    message: string,
+    phoneNumber: string
+  ) => {
+    let url = `whatsapp://send?text=${encodeURIComponent(
+      message
+    )}&phone=${phoneNumber}`;
+
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+        cleanAndclose();
+      } else {
+        alert("WhatsApp not installed");
+      }
+    } catch (error) {
+      console.error("There was an error trying to open WhatsApp", error);
+    }
+  };
+
+  const cleanAndclose = () => {
+    setName("");
+    setQuantity("1");
+    setModalVisible(!modalVisible);
+  };
 
   return (
     <>
@@ -46,14 +75,15 @@ const OrderModal = () => {
               </View>
 
               <View style={{ gap: 10 }}>
-                <Button onPress={() => alert("Pedido enviado!")}>
+                <Button
+                  onPress={() => {
+                    sendMessageToWhatsApp(message, "+541161344582");
+                  }}
+                >
                   Enviar Pedido por WhatsApp
                 </Button>
 
-                <Button
-                  variant="secondary"
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
+                <Button variant="secondary" onPress={cleanAndclose}>
                   Cancelar
                 </Button>
               </View>
