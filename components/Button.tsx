@@ -1,15 +1,17 @@
 import { Colors } from "@/constants/Colors";
 import { PropsWithChildren } from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View, Image, StyleSheet } from "react-native";
 
 interface ButtonProps extends PropsWithChildren {
   onPress: () => void;
   variant?: "primary" | "secondary";
+  icon?: string;
 }
 
 export default function ButtonComponent({
   onPress,
   variant = "primary",
+  icon,
   children,
 }: ButtonProps) {
   type BgStyleType = {
@@ -70,8 +72,18 @@ export default function ButtonComponent({
       style={({ pressed }) => bgStyles(pressed)[variant]}
     >
       {({ pressed }) => (
-        <Text style={textStyles(pressed)[variant]}>{children}</Text>
+        <View>
+          <Text style={textStyles(pressed)[variant]}>{children}</Text>
+        </View>
       )}
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  whatsappIcon: {
+    width: 30,
+    height: 30,
+    marginRight: 10,
+  },
+});

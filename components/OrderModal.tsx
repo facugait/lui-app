@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { Modal, View, StyleSheet, TextInput, Linking } from "react-native";
+import {
+  Modal,
+  View,
+  StyleSheet,
+  TextInput,
+  Linking,
+  Text,
+  Image,
+} from "react-native";
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import QuantityInput from "@/components/QuantityInput";
 import { Colors } from "@/constants/Colors";
+import { Menu } from "@/interfaces";
 
-const OrderModal = () => {
+const OrderModal = ({ menu }: { menu: Menu }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("1");
@@ -56,6 +65,18 @@ const OrderModal = () => {
           <View style={styles.modalView}>
             <Heading level={3}>INGRESÁ TU ORDEN</Heading>
             <View style={{ gap: 20 }}>
+              <View style={styles.menuInfo}>
+                <Image
+                  style={{ width: 90, height: 50 }}
+                  source={{ uri: menu.imageUrl }}
+                />
+                <View>
+                  <Text style={{ fontWeight: "bold" }}>{menu.name}</Text>
+                  <Text style={{ color: Colors.GRIS_OSCURO }}>
+                    {`$${menu.price.toLocaleString("es-AR")}`}
+                  </Text>
+                </View>
+              </View>
               <View
                 style={{
                   gap: 10,
@@ -64,14 +85,34 @@ const OrderModal = () => {
                   width: "100%",
                 }}
               >
-                <TextInput
-                  style={styles.inputName}
-                  onChangeText={setName}
-                  value={name}
-                  placeholder="Ingresá tu nombre"
-                  placeholderTextColor={Colors.GRIS_OSCURO}
-                />
-                <QuantityInput onChangeQuantity={setQuantity} />
+                <View style={{ minHeight: 60 }}>
+                  <Text style={{ marginLeft: 4 }}>Tu nombre</Text>
+                  <TextInput
+                    style={styles.inputName}
+                    onChangeText={setName}
+                    value={name}
+                    placeholder="Ingresá tu nombre"
+                    placeholderTextColor={Colors.GRIS_OSCURO}
+                  />
+                </View>
+                <View>
+                  <Text>Cantidad</Text>
+                  <QuantityInput onChangeQuantity={setQuantity} />
+                </View>
+              </View>
+
+              <View>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 18,
+                    textAlign: "right",
+                  }}
+                >
+                  {`TOTAL: $${(menu.price * Number(quantity)).toLocaleString(
+                    "es-AR"
+                  )}`}
+                </Text>
               </View>
 
               <View style={{ gap: 10 }}>
@@ -79,6 +120,7 @@ const OrderModal = () => {
                   onPress={() => {
                     sendMessageToWhatsApp(message, "+541161344582");
                   }}
+                  icon="@/assets/whatsapp.png"
                 >
                   Enviar Pedido por WhatsApp
                 </Button>
@@ -96,6 +138,12 @@ const OrderModal = () => {
 };
 
 const styles = StyleSheet.create({
+  menuInfo: {
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 20,
+    flexDirection: "row",
+  },
   inputName: {
     height: 40,
     borderWidth: 1,
@@ -104,25 +152,24 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BEIGE_CLARITO,
     borderRadius: 15,
     flex: 4,
+    marginTop: 4,
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.BEIGE,
+    width: "100%",
   },
   modalView: {
     gap: 40,
-    padding: 35,
+    padding: 25,
     alignItems: "center",
     shadowOffset: {
       width: 0,
       height: 2,
     },
     width: "100%",
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
 });
 

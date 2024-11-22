@@ -20,6 +20,7 @@ const QuantityInput = ({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        marginTop: 4,
       }}
     >
       <Text

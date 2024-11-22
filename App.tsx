@@ -5,19 +5,16 @@ import Heading from "@/components/Heading";
 import Text from "@/components/Text";
 import OrderModal from "@/components/OrderModal";
 import { useEffect, useState } from "react";
+import { Menu } from "./interfaces";
 
 export default function App() {
-  const [menuDelDia, setMenuDelDia] = useState<{
-    name?: string;
-    imageUrl: string;
-    price: number;
-  }>();
+  const [menuDelDia, setMenuDelDia] = useState<Menu>();
 
   const { name, imageUrl, price } = menuDelDia || {};
 
   const initMenuDelDia = () => {
     try {
-      fetch("https://dd42-181-84-76-96.ngrok-free.app/api/menu?isDaysMenu=true")
+      fetch("https://83ee-181-84-76-96.ngrok-free.app/api/menu?isDaysMenu=true")
         .then((res) => res.json())
         .then((data) => data[0])
         .then(setMenuDelDia);
@@ -42,7 +39,7 @@ export default function App() {
     >
       <StatusBar />
       {menuDelDia && (
-        <View style={{ gap: 20 }}>
+        <View style={{ gap: 20, alignItems: "center" }}>
           <Image source={require("@/assets/splash.png")} style={styles.logo} />
           <Heading>MENU DEL DIA</Heading>
           <View
@@ -63,13 +60,13 @@ export default function App() {
                 width: 200,
               }}
             >
-              <Text centered>{menuDelDia.name}</Text>
+              <Text centered>{name}</Text>
               <Text centered bold bigger price>
-                {`$${menuDelDia.price.toLocaleString("es-AR")}`}
+                {`$${price!.toLocaleString("es-AR")}`}
               </Text>
             </View>
           </View>
-          <OrderModal />
+          <OrderModal menu={menuDelDia} />
         </View>
       )}
     </View>
@@ -78,8 +75,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   logo: {
-    width: 205,
-    height: 100,
-    marginTop: -100,
+    width: 305,
+    height: 200,
+    marginTop: -160,
   },
 });
