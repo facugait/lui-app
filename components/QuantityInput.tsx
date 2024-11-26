@@ -27,6 +27,7 @@ const QuantityInput = ({
         style={{
           fontWeight: "bold",
           fontSize: 25,
+          paddingEnd: 8,
         }}
       >
         {quantity}

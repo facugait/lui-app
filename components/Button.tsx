@@ -11,7 +11,7 @@ interface ButtonProps extends PropsWithChildren {
 export default function ButtonComponent({
   onPress,
   variant = "primary",
-  icon,
+  icon = "",
   children,
 }: ButtonProps) {
   type BgStyleType = {
@@ -72,7 +72,10 @@ export default function ButtonComponent({
       style={({ pressed }) => bgStyles(pressed)[variant]}
     >
       {({ pressed }) => (
-        <View>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          {icon && (
+            <Image source={{ uri: String(icon) }} style={styles.whatsappIcon} />
+          )}
           <Text style={textStyles(pressed)[variant]}>{children}</Text>
         </View>
       )}
@@ -82,8 +85,8 @@ export default function ButtonComponent({
 
 const styles = StyleSheet.create({
   whatsappIcon: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
     marginRight: 10,
   },
 });
